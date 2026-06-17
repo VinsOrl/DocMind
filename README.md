@@ -223,19 +223,6 @@ docmind/
 
 ---
 
-## 🩺 Troubleshooting
-
-| Symptom | Fix |
-|---|---|
-| App won't start: `SECRET_KEY must be a strong random value` | Set a real `SECRET_KEY` (see Configuration). |
-| Answers say "LLM service error / connection refused" | Is Ollama running? On Docker+Linux, set `OLLAMA_HOST=0.0.0.0` (see Docker note). |
-| `403 / requires a subscription` | Your `OLLAMA_MODEL` is a cloud model — switch to a local one. |
-| First answer is very slow | The model loads on first use; subsequent answers are faster. |
-| Poor answers on a non-English PDF | Ask in the document's language (see Tips). |
-| Document stuck on `failed` | The PDF is likely scanned/image-only with no extractable text. |
-
----
-
 ## 📚 Docs
 
 The full design specification lives in [`docs/`](docs/) (overview, backend, frontend, database,
