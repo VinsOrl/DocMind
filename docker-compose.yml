@@ -1,0 +1,37 @@
+services:
+  backend:
+    build: ./backend
+    ports:
+      - "8000:8000"
+    extra_hosts:
+      # Lets the container reach the host's Ollama daemon on Linux
+      - "host.docker.internal:host-gateway"
+    environment:
+      # Ollama runs on the HOST at 11434 — reach it via host.docker.internal
+      - OLLAMA_BASE_URL=http://host.docker.internal:11434
+      - OLLAMA_MODEL=gemma4:31b-cloud
+      - EMBEDDING_MODEL=intfloat/multilingual-e5-base
+      - SECRET_KEY=${SECRET_KEY:?SECRET_KEY must be set (see .env / .env.example)}
+      - DATABASE_URL=sqlite:////app/data/docmind.db
+      - UPLOAD_DIR=/app/uploads
+      - CHROMA_DIR=/app/chroma_db
+      - FRONTEND_URL=http://localhost:5173
+    volumes:
+      - db_data:/app/data
+      - uploads_data:/app/uploads
+      - chroma_data:/app/chroma_db
+
+  frontend:
+    build:
+      context: ./frontend
+      args:
+        VITE_API_URL: /api
+    ports:
+      - "5173:80"
+    depends_on:
+      - backend
+
+volumes:
+  db_data:
+  uploads_data:
+  chroma_data:

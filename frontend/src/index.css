@@ -1,0 +1,140 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Grain texture system ─────────────────────────────── */
+.grain-layer {
+  position: relative;
+}
+.grain-layer::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity: 0.09;
+  pointer-events: none;
+  border-radius: inherit;
+  z-index: 0;
+}
+.grain-heavy::before { opacity: 0.14; }
+.grain-light::before  { opacity: 0.07; }
+
+/* ── Base styles ──────────────────────────────────────── */
+body {
+  background-color: #141210;
+  color: #e8e0d5;
+  font-family: 'IBM Plex Sans', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  margin: 0;
+}
+
+/* ── Card / surface ───────────────────────────────────── */
+.card {
+  background: #1e1b18;
+  border: 1px solid #3a3228;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.4), 0 0 0 0.5px rgba(201,169,110,0.06);
+}
+.card:hover {
+  border-color: #c9a96e44;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.5), 0 0 0 1px rgba(201,169,110,0.12);
+  transition: box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+/* ── Buttons ──────────────────────────────────────────── */
+.btn-primary {
+  background: #c9a96e;
+  color: #141210;
+  font-weight: 500;
+  border-radius: 8px;
+  padding: 8px 16px;
+  transition: background 0.15s ease, box-shadow 0.15s ease;
+  cursor: pointer;
+  border: none;
+}
+.btn-primary:hover {
+  background: #d4b87a;
+  box-shadow: 0 0 12px rgba(201,169,110,0.3);
+}
+.btn-primary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.btn-outline {
+  background: transparent;
+  color: #e8e0d5;
+  border: 1px solid #3a3228;
+  border-radius: 8px;
+  padding: 8px 16px;
+  cursor: pointer;
+  transition: border-color 0.15s ease;
+}
+.btn-outline:hover {
+  border-color: #c9a96e88;
+}
+
+/* ── Input fields ─────────────────────────────────────── */
+.input-field {
+  background: #262118;
+  border: 1px solid #3a3228;
+  color: #e8e0d5;
+  border-radius: 8px;
+  padding: 10px 14px;
+  transition: border-color 0.15s ease;
+  width: 100%;
+  box-sizing: border-box;
+}
+.input-field:focus {
+  outline: none;
+  border-color: #c9a96e88;
+  box-shadow: 0 0 0 3px rgba(201,169,110,0.1);
+}
+
+/* ── Chat bubbles ─────────────────────────────────────── */
+.bubble-user {
+  background: #c9a96e22;
+  border: 1px solid #c9a96e33;
+  border-radius: 16px 16px 4px 16px;
+}
+.bubble-ai {
+  background: #1e1b18;
+  border: 1px solid #3a3228;
+  border-radius: 16px 16px 16px 4px;
+}
+
+/* ── Loading skeleton / thinking dots ─────────────────── */
+@keyframes shimmer-warm {
+  0%   { background-position: -400px 0; }
+  100% { background-position: 400px 0; }
+}
+.skeleton {
+  background: linear-gradient(90deg, #1e1b18 25%, #2e2920 50%, #1e1b18 75%);
+  background-size: 800px 100%;
+  animation: shimmer-warm 1.6s ease infinite;
+}
+@keyframes pulse-dot {
+  0%, 80%, 100% { opacity: 0.3; }
+  40% { opacity: 1; }
+}
+.dot { animation: pulse-dot 1.4s infinite both; }
+.dot:nth-child(2) { animation-delay: 0.2s; }
+.dot:nth-child(3) { animation-delay: 0.4s; }
+
+/* ── Markdown answer styling ──────────────────────────── */
+.answer-md p { margin: 0 0 0.6em; }
+.answer-md p:last-child { margin-bottom: 0; }
+.answer-md ul, .answer-md ol { margin: 0.4em 0; padding-left: 1.2em; }
+.answer-md code {
+  font-family: 'IBM Plex Mono', monospace;
+  background: #262118;
+  padding: 1px 5px;
+  border-radius: 4px;
+  font-size: 0.9em;
+}
+.answer-md pre {
+  background: #141210;
+  padding: 10px;
+  border-radius: 8px;
+  overflow-x: auto;
+}
