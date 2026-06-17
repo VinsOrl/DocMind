@@ -1,3 +1,13 @@
+# 課程：互動式網頁程式設計 -- 筆記、習題與報告
+
+欄位 | 內容
+-----|--------
+學期 | 114 學年下學期
+學生 |  林新興
+學號末兩碼 | 56
+
+---
+
 # DocMind — Document Q&A System (RAG)
 
 Upload a PDF, ask questions about it in natural language, and get answers **grounded in the
