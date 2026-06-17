@@ -63,7 +63,7 @@ ollama serve   # usually already running as a service
 ## 🚀 Quick start — Docker (recommended)
 
 ```bash
-git clone <your-repo-url> docmind
+git clone https://github.com/VinsOrl/DocMind docmind
 cd docmind
 
 # 1. Create the root .env with a strong secret (required — the app refuses to start without one)
